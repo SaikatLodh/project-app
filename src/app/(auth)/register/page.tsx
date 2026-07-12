@@ -7,6 +7,7 @@ import { emailSchema, EmailInput } from "@/lib/validations/auth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Loader2 } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function SendEmailPage() {
   const router = useRouter();
@@ -35,6 +36,7 @@ export default function SendEmailPage() {
         throw new Error(result.error || "Failed to send OTP");
       }
 
+      toast.success('OTP sent! Check your email.');
       router.push(`/verify-otp?email=${encodeURIComponent(data.email)}`);
     } catch (err: any) {
       setError(err.message);

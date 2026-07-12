@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerDetailsSchema, RegisterDetailsInput } from "@/lib/validations/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2, Eye, EyeOff } from "lucide-react";
+import toast from "react-hot-toast";
 
 function RegisterDetailsContent() {
   const router = useRouter();
@@ -45,6 +46,7 @@ function RegisterDetailsContent() {
         throw new Error(regResult.error || "Failed to register");
       }
 
+      toast.success('Account created successfully! Please sign in.');
       router.push("/login?registered=true");
     } catch (err: any) {
       setError(err.message);

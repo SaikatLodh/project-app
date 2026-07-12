@@ -5,6 +5,7 @@ import { useSync } from '../Editor/SyncProvider';
 import { format } from 'date-fns';
 import { History, Save, RotateCcw, ChevronRight, Loader2 } from 'lucide-react';
 import * as Y from 'yjs';
+import toast from 'react-hot-toast';
 
 interface Version {
   _id: string;
@@ -52,7 +53,10 @@ export function VersionSidebar({ documentId, isReadonly = false }: Props) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name }),
       });
-      if (res.ok) await fetchVersions();
+      if (res.ok) {
+        await fetchVersions();
+        toast.success('Version saved successfully');
+      }
     } catch (e) {
       console.error('Failed to save version', e);
     } finally {

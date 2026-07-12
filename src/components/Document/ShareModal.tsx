@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { X, UserPlus, Loader2, Trash2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface Collaborator {
   user: {
@@ -78,6 +79,7 @@ export function ShareModal({ documentId, onClose }: Props) {
       setEmail('');
       setRole('viewer');
       await fetchCollaborators();
+      toast.success('Collaborator added successfully');
     } catch (err: any) {
       setError(err.message || 'An error occurred.');
     } finally {
@@ -100,6 +102,7 @@ export function ShareModal({ documentId, onClose }: Props) {
       }
       
       await fetchCollaborators();
+      toast.success('Collaborator removed successfully');
     } catch (err: any) {
       setError(err.message || 'An error occurred.');
     }

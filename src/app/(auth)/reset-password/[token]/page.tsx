@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { resetPasswordSchema, ResetPasswordInput } from "@/lib/validations/auth";
 import { useRouter } from "next/navigation";
 import { Loader2, Eye, EyeOff } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function ResetPasswordPage({ params }: { params: Promise<{ token: string }> }) {
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function ResetPasswordPage({ params }: { params: Promise<{ token:
         throw new Error(result.error || "Failed to reset password");
       }
 
+      toast.success('Password reset successfully! Please sign in.');
       router.push("/login?reset=success");
     } catch (err: any) {
       setError(err.message);

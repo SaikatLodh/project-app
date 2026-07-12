@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
+import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { otpSchema, OtpInput } from "@/lib/validations/auth";
@@ -39,6 +40,7 @@ function VerifyOtpContent() {
         throw new Error(verifyResult.error || "Invalid OTP");
       }
 
+      toast.success('Email verified successfully!');
       router.push(`/register/details?email=${encodeURIComponent(email)}`);
     } catch (err: any) {
       setError(err.message);

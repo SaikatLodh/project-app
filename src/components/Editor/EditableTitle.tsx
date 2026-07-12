@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Check, Loader2, Pencil, X } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface Props {
   documentId: string;
@@ -59,6 +60,7 @@ export function EditableTitle({ documentId, initialTitle, isReadonly }: Props) {
       if (!res.ok) throw new Error('Failed to update title.');
       setTitle(trimmed);
       setEditing(false);
+      toast.success('Document renamed successfully');
     } catch (err: any) {
       setError(err.message ?? 'Something went wrong.');
     } finally {

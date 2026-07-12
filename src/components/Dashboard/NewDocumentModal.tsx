@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { X, FileText, Loader2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 interface Props {
   onClose: () => void;
@@ -43,6 +44,7 @@ export function NewDocumentModal({ onClose }: Props) {
       });
       if (!res.ok) throw new Error('Failed to create document.');
       const { document } = await res.json();
+      toast.success('Document created successfully');
       router.push(`/document/${document._id}`);
     } catch (err: any) {
       setError(err.message ?? 'Something went wrong.');

@@ -8,6 +8,7 @@ import { format } from 'date-fns';
 import { NewDocumentModal } from './NewDocumentModal';
 import { DeleteDocumentModal } from './DeleteDocumentModal';
 import { LogoutModal } from './LogoutModal';
+import toast from 'react-hot-toast';
 
 interface Doc {
   _id: string;
@@ -34,6 +35,7 @@ export function DashboardClient({ initialDocuments, currentUserId }: Props) {
     setIsLoggingOut(true);
     try {
       await fetch('/api/auth/logout', { method: 'POST' });
+      toast.success('Logged out successfully');
     } finally {
       router.push('/login');
       router.refresh();
@@ -46,6 +48,7 @@ export function DashboardClient({ initialDocuments, currentUserId }: Props) {
     if (res.ok) {
       setDocuments((prev) => prev.filter((d) => d._id !== deleteTarget._id));
       setDeleteTarget(null);
+      toast.success('Document deleted successfully');
     }
   };
 

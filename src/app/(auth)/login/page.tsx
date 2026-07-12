@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
+import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, LoginInput } from "@/lib/validations/auth";
@@ -39,6 +40,7 @@ function LoginForm() {
         throw new Error(result.error || "Failed to login");
       }
 
+      toast.success('Signed in successfully!');
       router.push(from);
       router.refresh();
     } catch (err: any) {
