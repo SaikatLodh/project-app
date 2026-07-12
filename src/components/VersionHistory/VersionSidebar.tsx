@@ -71,7 +71,7 @@ export function VersionSidebar({ documentId, isReadonly = false }: Props) {
       const currentFragment = ydoc.getXmlFragment('default');
       currentFragment.delete(0, currentFragment.length);
       const oldFragment = tempDoc.getXmlFragment('default');
-      const cloned = oldFragment.toArray().map(item => item.clone());
+      const cloned = oldFragment.toArray().map(item => item.clone()) as (Y.XmlElement | Y.XmlText)[];
       currentFragment.insert(0, cloned);
     });
   };
